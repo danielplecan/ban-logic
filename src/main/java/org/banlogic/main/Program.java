@@ -1,11 +1,12 @@
 package org.banlogic.main;
 
+import java.util.List;
 import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.PropertyConfigurator;
+import org.banlogic.file.FileReader;
+import org.banlogic.model.ProtocolStep;
+import org.banlogic.parser.StepParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
 
 /**
  * Created by Alexandru on 4/23/2016.
@@ -16,10 +17,11 @@ public class Program {
 
     public static void main(String... args) {
         BasicConfigurator.configure();
-        //TODO init point
-        if(args.length < 1){
-            LOGGER.info("Input format: app.jar filename.txt");
-            return;
-        }
+
+        List<String> lines = FileReader.readLines("kerberos.txt");
+
+        List<ProtocolStep> protocolSteps = StepParser.parseProtocolSteps(lines);
+
+        System.out.println(protocolSteps);
     }
 }
