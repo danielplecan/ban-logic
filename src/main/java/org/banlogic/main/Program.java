@@ -4,7 +4,7 @@ import java.util.List;
 import org.apache.log4j.BasicConfigurator;
 import org.banlogic.file.FileReader;
 import org.banlogic.model.ProtocolStep;
-import org.banlogic.parser.StepParser;
+import org.banlogic.parser.ProtocolParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,10 +18,12 @@ public class Program {
     public static void main(String... args) {
         BasicConfigurator.configure();
 
-        List<String> lines = FileReader.readLines("kerberos.txt");
+        List<String> protocolLines = FileReader.readLines("kerberos.txt");
 
-        List<ProtocolStep> protocolSteps = StepParser.parseProtocolSteps(lines);
+        List<ProtocolStep> protocolSteps = ProtocolParser.parseProtocolSteps(protocolLines);
+        List<String> protocolAssumptions = ProtocolParser.parseProtocolAssumptions(protocolLines);
 
         System.out.println(protocolSteps);
+        System.out.println(protocolAssumptions);
     }
 }
