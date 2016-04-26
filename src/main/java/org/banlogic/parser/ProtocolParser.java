@@ -1,6 +1,8 @@
 package org.banlogic.parser;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -44,5 +46,30 @@ public final class ProtocolParser {
         protocolStep.setMessage(Arrays.asList(stepMatcher.group(3).split(COMMA)));
 
         return protocolStep;
+    }
+
+    public static List<String> parseMessage(String tobeParsed){
+        Pattern patternSimple = Pattern.compile("(\\{(.*)\\}_[\\w],)|(\\{(.*)\\}_[\\w])");
+        Pattern patternFind = Pattern.compile("\\{(.*)\\}_[\\w]");
+
+        Matcher matcher = patternSimple.matcher(tobeParsed);
+        if(matcher.matches()){
+            List<String> tokens = new LinkedList<String>();
+            matcher = patternFind.matcher(tobeParsed);
+            while(matcher.find())
+            {
+                String token = matcher.group( 0 ); //group 0 is always the entire match
+              /*  Matcher matchInside = patternSimple.matcher(tobeParsed);
+                if (matchInside.matches()){
+
+                }*/
+                tokens.add(token);
+            }
+            return tokens;
+        }else
+        if(patternSimple.matcher(tobeParsed).matches()){
+            return Arrays.asList(new String[]{tobeParsed});
+        }
+        return Arrays.asList();
     }
 }
