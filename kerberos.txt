@@ -1,8 +1,3 @@
-A -> B:{S}_K, A, B
-A -> B:{S}_K, A, B
-A -> B:{S}_K, A, B
-A -> B:{S}_K, A, B
+A -> B:{X, {Z}_K}_K, {Y}_K
 
-
-A believes B
-A believes B said X
+BbelievesA<-K->B

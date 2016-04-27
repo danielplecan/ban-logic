@@ -5,8 +5,9 @@ public enum Operators {
     BELIEVES("believes"),
     SEES("sees"),
     CONTROLS("controls"),
-    FRESH("fresh(%s)");
-//    KEY,
+    SAID("said"),
+    FRESH("fresh(%s)"),
+    KEY("<-(%s)->");
 //    PK,
 //    SECRET,
 //    COMBINATION;

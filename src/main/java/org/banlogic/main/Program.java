@@ -32,24 +32,25 @@ public class Program {
             formulas.addAll(InferenceSystem.generateSeesFormulasFromProtocolStep(step));
         });
 
-//        while (true) {
-//            int initialNoOfFormulas = formulas.size();
-//
-//            List<String> inferedFormulas = new ArrayList<>();
-//
-//            formulas.forEach((firstFormula) -> {
-//                formulas.forEach((secondFormula) -> {
-//                    inferedFormulas.addAll(InferenceSystem.inferFormulas(firstFormula, secondFormula));
-//                });
-//            });
-//
-//            formulas.addAll(inferedFormulas);
-//
-//            if (initialNoOfFormulas == formulas.size()) {
-//                break;
-//            }
-//        }
+        while (true) {
+            int initialNoOfFormulas = formulas.size();
 
+            List<String> inferedFormulas = new ArrayList<>();
+
+            formulas.forEach((firstFormula) -> {
+                formulas.forEach((secondFormula) -> {
+                    inferedFormulas.addAll(InferenceSystem.inferFormulas(firstFormula, secondFormula));
+                });
+            });
+
+            formulas.addAll(inferedFormulas);
+
+            if (initialNoOfFormulas == formulas.size()) {
+                break;
+            }
+        }
+        
         System.out.println(formulas);
+//        System.out.println(InferenceSystem.inferMessageMeaningForSharedKeys("PbelievesQ<-K->P", "Psees{XXX,A,B}_K"));
     }
 }
