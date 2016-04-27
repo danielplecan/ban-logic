@@ -50,22 +50,10 @@ public final class ProtocolParser {
 
     public static List<String> parseMessage(String tobeParsed){
         Pattern patternSimple = Pattern.compile("(\\{(.*)\\}_[\\w],)|(\\{(.*)\\}_[\\w])");
-        Pattern patternFind = Pattern.compile("\\{(.*)\\}_[\\w]");
-
         Matcher matcher = patternSimple.matcher(tobeParsed);
         if(matcher.matches()){
-            List<String> tokens = new LinkedList<String>();
-            matcher = patternFind.matcher(tobeParsed);
-            while(matcher.find())
-            {
-                String token = matcher.group( 0 ); //group 0 is always the entire match
-              /*  Matcher matchInside = patternSimple.matcher(tobeParsed);
-                if (matchInside.matches()){
-
-                }*/
-                tokens.add(token);
-            }
-            return tokens;
+            String[] split = tobeParsed.split(",(?![^{]*})");
+            return Arrays.asList(split);
         }else
         if(patternSimple.matcher(tobeParsed).matches()){
             return Arrays.asList(new String[]{tobeParsed});
