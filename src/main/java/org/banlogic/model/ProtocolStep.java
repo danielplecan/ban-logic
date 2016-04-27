@@ -8,5 +8,5 @@ public class ProtocolStep {
 
     private String sender;
     private String receiver;
-    private List<String> message;
+    private List<String> messages;
 }

@@ -1,4 +1,8 @@
 A -> B:{S}_K, A, B
+A -> B:{S}_K, A, B
+A -> B:{S}_K, A, B
+A -> B:{S}_K, A, B
 
-A|=B
-A|=B|~X
+
+A believes B
+A believes B said X
