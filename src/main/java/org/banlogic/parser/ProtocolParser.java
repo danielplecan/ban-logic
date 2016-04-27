@@ -58,6 +58,9 @@ public final class ProtocolParser {
         if(patternSimple.matcher(tobeParsed).matches()){
             return Arrays.asList(new String[]{tobeParsed});
         }
-        return Arrays.asList();
+        else {
+            String[] split = tobeParsed.split(",(?![^{]*})");
+            return Arrays.asList(split);
+        }
     }
 }
