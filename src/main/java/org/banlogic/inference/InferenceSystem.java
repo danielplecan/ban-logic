@@ -5,29 +5,24 @@ import org.banlogic.inference.rules.InferMessageMeaningForSharedKeys;
 import org.banlogic.inference.rules.InferenceRule;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import org.banlogic.inference.rules.InferMessageMeaningForSharedSecrets;
 
 public final class InferenceSystem {
 
-    private List<InferenceRule> inferenceRuleList = new ArrayList<>();
+    private final List<InferenceRule> inferenceRuleList = new ArrayList<>();
 
     public InferenceSystem() {
         inferenceRuleList.add(new InferMessageMeaningForSharedKeys());
         inferenceRuleList.add(new InferMessageMeaningForPublicKeys());
+        inferenceRuleList.add(new InferMessageMeaningForSharedSecrets());
     }
 
     public List<String> inferFormulas(String firstFormula, String secondFormula) {
         List<String> newFormulas = new ArrayList<>();
 
-        inferenceRuleList.forEach((rule) ->
-                        newFormulas.addAll(rule.apply(firstFormula, secondFormula))
-        );
+        inferenceRuleList.forEach(rule -> newFormulas.addAll(rule.apply(firstFormula, secondFormula)));
 
-        if (!newFormulas.isEmpty()) {
-            return newFormulas;
-        }
-
-        return Collections.EMPTY_LIST;
+        return newFormulas;
     }
 }

@@ -48,15 +48,14 @@ public final class ProtocolParser {
             return Arrays.asList(split);
         } else if (patternSimple.matcher(tobeParsed).matches()) {
             return Arrays.asList(new String[]{tobeParsed});
-        }
-        else {
+        } else {
             String[] split = tobeParsed.split(",(?![^{]*})");
             return Arrays.asList(split);
         }
     }
 
     public static List<String> parseMessageee(String message) {
-        Pattern pattern = Pattern.compile("(\\{(.+)\\}_inv\\(\\w+\\),)|(\\{(.+)\\}_inv\\(\\w+\\))|(\\{(.+)\\}_\\w+,)|(\\{(.+)\\}_\\w+)|(\\w+,)|(\\w+)");
+        Pattern pattern = Pattern.compile("(\\{(.+)\\}_inv\\(\\w+\\),)|(\\{(.+)\\}_inv\\(\\w+\\))|(\\{(.+)\\}_\\w+,)|(\\{(.+)\\}_\\w+)|(<(.+)>_\\w+,)|(<(.+)>_\\w+)|(\\w+,)|(\\w+)");
         Matcher matcher = pattern.matcher(message);
         List<String> list = new ArrayList<>();
 
