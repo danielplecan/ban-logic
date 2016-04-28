@@ -55,7 +55,8 @@ public final class ProtocolParser {
     }
 
     public static List<String> parseMessageee(String message) {
-        Pattern pattern = Pattern.compile("(\\{(.+)\\}_inv\\(\\w+\\),)|(\\{(.+)\\}_inv\\(\\w+\\))|(\\{(.+)\\}_\\w+,)|(\\{(.+)\\}_\\w+)|(<(.+)>_\\w+,)|(<(.+)>_\\w+)|(\\w+,)|(\\w+)");
+//        Pattern pattern = Pattern.compile("(\\{(.+)\\}_inv\\(\\w+\\),)|(\\{(.+)\\}_inv\\(\\w+\\))|(\\{(.+)\\}_\\w+,)|(\\{(.+)\\}_\\w+)|(<(.+)>_\\w+,)|(<(.+)>_\\w+)|((\\w|<|-|>)+,)|((\\w|<|-|>)+)");
+        Pattern pattern = Pattern.compile("(\\{(.+)\\}_inv\\(\\w+\\),)|(\\{(.+)\\}_inv\\(\\w+\\))|(\\{(.+)\\}_\\w+,)|(\\{(.+)\\}_\\w+)|(<(.+)>_\\w+,)|(<(.+)>_\\w+)|([^,]+,)|([^,]+)");
         Matcher matcher = pattern.matcher(message);
         List<String> list = new ArrayList<>();
 

@@ -29,13 +29,27 @@ public class InferMessageMeaningForSharedKeys implements InferenceRule {
         Pattern firstPattern = compile(firstPatternValue);
         Matcher firstMatcher = firstPattern.matcher(firstFormula);
 
-        if (!firstMatcher.matches()) {
-            return Collections.EMPTY_LIST;
-        }
+        String firstPatternValueReversed = "^" + NAME_GROUP + BELIEVES_PATTERN + "\\1" + format(KEY.getValue(), NAME_GROUP) + NAME_GROUP + "$";
+        Pattern firstPatternReversed = compile(firstPatternValueReversed);
+        Matcher firstMatcherReversed = firstPatternReversed.matcher(firstFormula);
 
-        String principalP = firstMatcher.group(1);
-        String principalQ = firstMatcher.group(2);
-        String key = firstMatcher.group(3);
+        String principalP;
+        String principalQ;
+        String key;
+
+        if (!firstMatcher.matches()) {
+            if (!firstMatcherReversed.matches()) {
+                return Collections.EMPTY_LIST;
+            } else {
+                principalP = firstMatcherReversed.group(1);
+                principalQ = firstMatcherReversed.group(3);
+                key = firstMatcherReversed.group(2);
+            }
+        } else {
+            principalP = firstMatcher.group(1);
+            principalQ = firstMatcher.group(2);
+            key = firstMatcher.group(3);
+        }
 
         String secondPatternValue = "^" + principalP + SEES_PATTERN + "(\\{(.+)\\}_" + key + ")$";
         Pattern secondPattern = compile(secondPatternValue);

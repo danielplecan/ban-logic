@@ -1,3 +1,15 @@
-A -> B:{X, {Z}_K}_K, {Y}_K
+S -> A : {Ts, A<-Kab->B, {Ts, A<-Kab->B}_Kbs}_Kas
+A -> B : {Ts, A<-Kab->B}_Kbs, {Ta, A<-Kab->B}_Kab
+B -> A : {Ta, A<-Kab->B}_Kab
 
-B|=A<-K->B
+A |= A<-Kas->S
+S |= A<-Kas->S
+S |= A<-Kab->B
+A |= S => A<-K->B
+A |= #(Ts)
+
+B |= B<-Kbs->S
+S |= B<-Kbs->S
+B |= S=>A<-K->B
+B |= #(Ts)
+B |= #(Ta)

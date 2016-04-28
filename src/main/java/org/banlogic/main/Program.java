@@ -51,8 +51,7 @@ public class Program {
                 break;
             }
         }
-        
-        System.out.println(formulas);
-//        System.out.println(InferenceSystem.inferMessageMeaningForSharedKeys("PbelievesQ<-K->P", "Psees{XXX,A,B}_K"));
+
+        formulas.forEach(formula -> System.out.println(formula));
     }
 }

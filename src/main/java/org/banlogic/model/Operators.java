@@ -16,9 +16,9 @@ public enum Operators {
     CONTROLS("=>"),
     SAID("|~"),
     FRESH("#(%s)"),
-    KEY("<-(%s)->"),
+    KEY("<-%s->"),
     PK("pk(%s,%s)"),
-    SECRET("<=(%s)=>"),
+    SECRET("<=%s=>"),
     COMBINATION("<%s>_%s");
 
     private final String value;
