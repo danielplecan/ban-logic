@@ -2,22 +2,14 @@ package org.banlogic.parser;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import static org.banlogic.model.ProtocolPatterns.STEP_PATTERN;
 import org.banlogic.model.ProtocolStep;
 
 public final class ProtocolParser {
-
-    private static final String PRINCIPAL_GROUP = "(\\w*)";
-    private static final String MESSAGE_GROUP = "(.*)";
-    private static final String ARROW = "->";
-    private static final String DOUBLE_COLON = ":";
-    private static final String COMMA = ",";
-    private static final String STEP = PRINCIPAL_GROUP + ARROW + PRINCIPAL_GROUP + DOUBLE_COLON + MESSAGE_GROUP;
-    private static final Pattern STEP_PATTERN = Pattern.compile(STEP);
 
     private ProtocolParser() {
     }
@@ -43,24 +35,39 @@ public final class ProtocolParser {
 
         protocolStep.setSender(stepMatcher.group(1));
         protocolStep.setReceiver(stepMatcher.group(2));
-        protocolStep.setMessage(Arrays.asList(stepMatcher.group(3).split(COMMA)));
+        protocolStep.setMessages(parseMessageee(stepMatcher.group(3)));
 
         return protocolStep;
     }
 
-    public static List<String> parseMessage(String tobeParsed){
+    public static List<String> parseMessage(String tobeParsed) {
         Pattern patternSimple = Pattern.compile("(\\{(.*)\\}_[\\w],)|(\\{(.*)\\}_[\\w])");
         Matcher matcher = patternSimple.matcher(tobeParsed);
-        if(matcher.matches()){
+        if (matcher.matches()) {
             String[] split = tobeParsed.split(",(?![^{]*})");
             return Arrays.asList(split);
-        }else
-        if(patternSimple.matcher(tobeParsed).matches()){
+        } else if (patternSimple.matcher(tobeParsed).matches()) {
             return Arrays.asList(new String[]{tobeParsed});
         }
         else {
             String[] split = tobeParsed.split(",(?![^{]*})");
             return Arrays.asList(split);
         }
+    }
+
+    public static List<String> parseMessageee(String message) {
+        Pattern pattern = Pattern.compile("(\\{(.+)\\}_\\w+,)|(\\{(.+)\\}_\\w+)|(\\w+,)|(\\w+)");
+        Matcher matcher = pattern.matcher(message);
+        List<String> list = new ArrayList<>();
+
+        while (matcher.find()) {
+            String match = matcher.group(0);
+            if (match.endsWith(",")) {
+                match = match.substring(0, match.length() - 1);
+            }
+            list.add(match);
+        }
+
+        return list;
     }
 }

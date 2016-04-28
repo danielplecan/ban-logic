@@ -1,4 +1,3 @@
-A -> B:{S}_K, A, B
+A -> B:{X, {Z}_K}_K, {Y}_K
 
-A|=B
-A|=B|~X
+BbelievesA<-K->B
