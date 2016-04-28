@@ -12,6 +12,10 @@ import java.util.stream.Collectors;
 import org.banlogic.model.Operators;
 import static org.banlogic.model.Operators.BELIEVES;
 import static org.banlogic.model.Operators.KEY;
+import static org.banlogic.model.Patterns.BELIEVES_PATTERN;
+import static org.banlogic.model.Patterns.INV_PATTERN;
+import static org.banlogic.model.Patterns.PK_PATTERN;
+import static org.banlogic.model.Patterns.SEES_PATTERN;
 import static org.banlogic.model.ProtocolPatterns.NAME_GROUP;
 import org.banlogic.model.ProtocolStep;
 import org.banlogic.parser.ProtocolParser;
@@ -53,7 +57,7 @@ public final class InferenceSystem {
     }
 
     public static List<String> inferMessageMeaningForSharedKeys(String firstFormula, String secondFormula) {
-        String firstPatternValue = "^" + NAME_GROUP + BELIEVES.getValue() + NAME_GROUP + format(KEY.getValue(), NAME_GROUP) + "\\1$";
+        String firstPatternValue = "^" + NAME_GROUP + BELIEVES_PATTERN + NAME_GROUP + format(KEY.getValue(), NAME_GROUP) + "\\1$";
         Pattern firstPattern = compile(firstPatternValue);
         Matcher firstMatcher = firstPattern.matcher(firstFormula);
 
@@ -65,7 +69,33 @@ public final class InferenceSystem {
         String principalQ = firstMatcher.group(2);
         String key = firstMatcher.group(3);
 
-        String secondPatternValue = "^" + principalP + Operators.SEES.getValue() + "(\\{(.+)\\}_" + key + ")$";
+        String secondPatternValue = "^" + principalP + SEES_PATTERN + "(\\{(.+)\\}_" + key + ")$";
+        Pattern secondPattern = compile(secondPatternValue);
+        Matcher secondMatcher = secondPattern.matcher(secondFormula);
+
+        if (!secondMatcher.matches() || ProtocolParser.parseMessageee(secondMatcher.group(1)).size() != 1) {
+            return Collections.EMPTY_LIST;
+        }
+
+        String message = secondMatcher.group(2);
+
+        return generateAllFormulas(principalP + BELIEVES.getValue() + principalQ + Operators.SAID.getValue(), SetUtil.generatePowerSet(ProtocolParser.parseMessageee(message)));
+    }
+
+    public static List<String> inferMessageMeaningForPublicKeys(String firstFormula, String secondFormula) {
+        String firstPatternValue = "^" + NAME_GROUP + BELIEVES_PATTERN + String.format(PK_PATTERN, NAME_GROUP, NAME_GROUP);
+        Pattern firstPattern = compile(firstPatternValue);
+        Matcher firstMatcher = firstPattern.matcher(firstFormula);
+
+        if (!firstMatcher.matches()) {
+            return Collections.EMPTY_LIST;
+        }
+
+        String principalP = firstMatcher.group(1);
+        String principalQ = firstMatcher.group(2);
+        String key = firstMatcher.group(3);
+
+        String secondPatternValue = "^" + principalP + SEES_PATTERN + "(\\{(.+)\\}_" + String.format(INV_PATTERN, key) + ")$";
         Pattern secondPattern = compile(secondPatternValue);
         Matcher secondMatcher = secondPattern.matcher(secondFormula);
 
