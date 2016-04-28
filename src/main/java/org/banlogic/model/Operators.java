@@ -2,15 +2,24 @@ package org.banlogic.model;
 
 public enum Operators {
 
-    BELIEVES("believes"),
-    SEES("sees"),
-    CONTROLS("controls"),
-    SAID("said"),
-    FRESH("fresh(%s)"),
-    KEY("<-(%s)->");
-//    PK,
-//    SECRET,
-//    COMBINATION;
+    BELIEVES("|="),
+    //    SEES("<|"),
+    //    CONTROLS("=>"),
+    //    SAID("|~"),
+    //    FRESH("#(%s)"),
+    //    KEY("<-(%s)->"),
+    //    PK,
+    //    SECRET("<=(%s)=>"),
+    //    COMBINATION;
+    //    BELIEVES("believes"),
+    SEES("<|"),
+    CONTROLS("=>"),
+    SAID("|~"),
+    FRESH("#(%s)"),
+    KEY("<-(%s)->"),
+    PK("pk(%s,%s)"),
+    SECRET("<=(%s)=>"),
+    COMBINATION("<%s>_%s");
 
     private final String value;
 

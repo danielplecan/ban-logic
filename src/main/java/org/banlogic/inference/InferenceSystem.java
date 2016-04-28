@@ -1,5 +1,6 @@
 package org.banlogic.inference;
 
+import org.banlogic.inference.rules.InferMessageMeaningForPublicKeys;
 import org.banlogic.inference.rules.InferMessageMeaningForSharedKeys;
 import org.banlogic.inference.rules.InferenceRule;
 
@@ -13,6 +14,7 @@ public final class InferenceSystem {
 
     public InferenceSystem() {
         inferenceRuleList.add(new InferMessageMeaningForSharedKeys());
+        inferenceRuleList.add(new InferMessageMeaningForPublicKeys());
     }
 
     public List<String> inferFormulas(String firstFormula, String secondFormula) {
