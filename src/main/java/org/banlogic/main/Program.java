@@ -12,6 +12,8 @@ import org.banlogic.parser.ProtocolParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static org.banlogic.inference.InferenceSystemUtils.generateSeesFormulasFromProtocolStep;
+
 /**
  * Created by Alexandru on 4/23/2016.
  */
@@ -29,17 +31,17 @@ public class Program {
         formulas.addAll(ProtocolParser.parseProtocolAssumptions(protocolLines));
 
         protocolSteps.forEach((step) -> {
-            formulas.addAll(InferenceSystem.generateSeesFormulasFromProtocolStep(step));
+            formulas.addAll(generateSeesFormulasFromProtocolStep(step));
         });
 
         while (true) {
             int initialNoOfFormulas = formulas.size();
-
+            InferenceSystem inferenceSystem = new InferenceSystem();
             List<String> inferedFormulas = new ArrayList<>();
 
             formulas.forEach((firstFormula) -> {
                 formulas.forEach((secondFormula) -> {
-                    inferedFormulas.addAll(InferenceSystem.inferFormulas(firstFormula, secondFormula));
+                    inferedFormulas.addAll(inferenceSystem.inferFormulas(firstFormula, secondFormula));
                 });
             });
 

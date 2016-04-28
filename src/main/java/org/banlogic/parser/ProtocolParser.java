@@ -49,8 +49,10 @@ public final class ProtocolParser {
         } else if (patternSimple.matcher(tobeParsed).matches()) {
             return Arrays.asList(new String[]{tobeParsed});
         }
-
-        return Arrays.asList();
+        else {
+            String[] split = tobeParsed.split(",(?![^{]*})");
+            return Arrays.asList(split);
+        }
     }
 
     public static List<String> parseMessageee(String message) {
