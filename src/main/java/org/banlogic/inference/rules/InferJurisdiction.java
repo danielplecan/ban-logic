@@ -29,7 +29,7 @@ public class InferJurisdiction implements InferenceRule {
         String principalQ = firstMatcher.group(2);
         String message = firstMatcher.group(3);
         
-        String secondPatternValue = "^" + principalP + BELIEVES_PATTERN + principalQ + BELIEVES_PATTERN + message;
+        String secondPatternValue = "^" + principalP + BELIEVES_PATTERN + principalQ + BELIEVES_PATTERN + Pattern.quote(message);
         Pattern secondPattern = compile(secondPatternValue);
         Matcher secondMatcher = secondPattern.matcher(secondFormula);
         

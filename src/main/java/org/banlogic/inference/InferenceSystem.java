@@ -6,6 +6,9 @@ import org.banlogic.inference.rules.InferenceRule;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.banlogic.inference.rules.InferComponentsForPublicKeys;
+import org.banlogic.inference.rules.InferComponentsForSelfPublicKeys;
+import org.banlogic.inference.rules.InferComponentsForSharedKeys;
 import org.banlogic.inference.rules.InferJurisdiction;
 import org.banlogic.inference.rules.InferMessageMeaningForSharedSecrets;
 import org.banlogic.inference.rules.InferNonceVerification;
@@ -20,6 +23,9 @@ public final class InferenceSystem {
         inferenceRuleList.add(new InferMessageMeaningForSharedSecrets());
         inferenceRuleList.add(new InferJurisdiction());
         inferenceRuleList.add(new InferNonceVerification());
+        inferenceRuleList.add(new InferComponentsForPublicKeys());
+        inferenceRuleList.add(new InferComponentsForSelfPublicKeys());
+        inferenceRuleList.add(new InferComponentsForSharedKeys());
     }
 
     public List<String> inferFormulas(String firstFormula, String secondFormula) {

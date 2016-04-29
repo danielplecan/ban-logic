@@ -17,7 +17,7 @@ public enum Operators {
     SAID("|~"),
     FRESH("#(%s)"),
     KEY("<-%s->"),
-    PK("pk(%s,%s)"),
+    PK("pk(%s;%s)"),
     SECRET("<=%s=>"),
     COMBINATION("<%s>_%s");
 

@@ -1,0 +1,13 @@
+A -> B : {Ta, Na, Xa, {Ya}_Kb}_inv(Ka)
+B -> A : {Tb, Nb, Na, Xb, {Yb}_Ka}_inv(Kb)
+A -> B: {Nb}_inv(Ka)
+
+A|=pk(A; Ka)
+A|=pk(B; Kb)
+A|=#(Na)
+A|=#(Tb)
+
+B|=pk(B; Kb)
+B|=pk(A; Ka)
+B|=#(Nb)
+B|=#(Ta)

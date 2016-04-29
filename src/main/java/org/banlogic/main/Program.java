@@ -24,7 +24,11 @@ public class Program {
     public static void main(String... args) {
         BasicConfigurator.configure();
 
-        List<String> protocolLines = FileReader.readLines("kerberos.txt");
+        List<String> protocolLines = FileReader.readLines("nspk.txt");
+//        List<String> protocolLines = FileReader.readLines("andrew-secure-rpc.txt");
+//        List<String> protocolLines = FileReader.readLines("ccitt.txt");
+//        List<String> protocolLines = FileReader.readLines("kerberos.txt");
+
         Set<String> formulas = new LinkedHashSet<>();
 
         List<ProtocolStep> protocolSteps = ProtocolParser.parseProtocolSteps(protocolLines);

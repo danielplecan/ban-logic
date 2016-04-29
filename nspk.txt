@@ -1,0 +1,26 @@
+S -> A: {pk(B; Kb)}_inv(Ks)
+A -> B: {Na}_Kb
+S -> B: {pk(A; Ka)}_inv(Ks)
+B -> A: {<A<=Nb=>B>_Na}_Ka
+A -> B: {<A<=Na=>B>_Nb}_Kb
+
+A |= pk(A; Ka)
+A |= pk(S; Ks)
+S |= pk(A; Ka)
+S |= pk(S; Ks)
+A |= S => pk(B; Kb)
+A |= #(Na)
+A |= A<=Na=>B
+A |= #(pk(B; Kb))
+
+B |= pk(B; Kb)
+B |= pk(S; Ks)
+S |= pk(B; Kb)
+B |= S => pk(A; Ka)
+B |= #(Nb)
+B |= A<=Nb=>B
+B |= #(pk(A; Ka))
+
+
+
+

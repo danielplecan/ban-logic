@@ -5,11 +5,12 @@ B -> A : {Ta, A<-Kab->B}_Kab
 A |= A<-Kas->S
 S |= A<-Kas->S
 S |= A<-Kab->B
-A |= S => A<-K->B
+A |= S => A<-Kab->B
 A |= #(Ts)
+A |= #(Ta)
 
 B |= B<-Kbs->S
 S |= B<-Kbs->S
-B |= S=>A<-K->B
+B |= S => A<-Kab->B
 B |= #(Ts)
 B |= #(Ta)

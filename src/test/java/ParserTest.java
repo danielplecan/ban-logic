@@ -44,4 +44,11 @@ public class ParserTest {
         assertEquals("A<-Kab->B", tokens.get(1));
         assertEquals("{Ts,A<-Kab->B}_Kbs", tokens.get(2));
     }
+    
+    @Test
+    public void shouldParsePKEntries() {
+        List<String> tokens = ProtocolParser.parseMessageee("pk(B;Kb)");
+        assertEquals(1, tokens.size());
+        assertEquals("pk(B;Kb)", tokens.get(0));
+    }
 }

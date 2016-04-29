@@ -1,0 +1,13 @@
+A -> B: {Na}_Kab
+B -> A: {Na, Nb}_Kab
+A -> B: {Nb}_Kab
+B -> A: {A<-KKab->B, NNb}_Kab
+
+A |= A<-Kab->B
+A |= B => A<-Kab->B
+A |= #(Na)
+
+B |= A<-Kab->B
+B |= A<-KKab->B
+B |= #(Nb)
+B |= #(NNb)
